@@ -10,7 +10,7 @@ class MVVMRepoImpl(private val mvvmLocalData: MVVMLocalData) : MVVMRepo {
 
     companion object {
         private var instance : MVVMRepoImpl? = null
-        fun getInstance() : MVVMRepo = instance ?: MVVMRepoImpl(MVVMLocalDataImpl.getInstance()).also {
+        fun getInstance(mvvmLocalData: MVVMLocalData) : MVVMRepo = instance ?: MVVMRepoImpl(mvvmLocalData).also {
             instance = it
         }
     }
