@@ -19,7 +19,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.textViewFirst.text = mvvmViewModel.getLocalData()
+        mvvmViewModel.getLocalData()
+        mvvmViewModel.localStringLiveData.observe (this) { data ->
+            binding.textViewFirst.text = data
+        }
     }
 }
 
