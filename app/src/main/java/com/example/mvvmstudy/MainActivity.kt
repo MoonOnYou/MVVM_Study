@@ -7,23 +7,19 @@ import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.mvvmstudy.base.BaseActivity
 import com.example.mvvmstudy.data.repo.MVVMRepoImpl
 import com.example.mvvmstudy.data.source.local.MVVMLocalDataImpl
 import com.example.mvvmstudy.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val mvvmViewModel by viewModels<MainViewModel> { MVVMViewModelProviderFactoryImpl() }
-    private lateinit var activityMainBinding: ActivityMainBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        activityMainBinding.lifecycleOwner = this
-        setContentView(activityMainBinding.root)
-        activityMainBinding.textViewFirst.text = mvvmViewModel.getLocalData()
+        binding.textViewFirst.text = mvvmViewModel.getLocalData()
     }
 }
 
