@@ -15,16 +15,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
-            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-                    return MainViewModel(
-                        MVVMRepoImpl.getInstance(MVVMLocalDataImpl.getInstance())
-                    ) as T
-                } else throw IllegalAccessException()
-            }
-        }).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this, MVVMViewModelProviderFactoryImpl()).get(MainViewModel::class.java)
 
         findViewById<TextView>(R.id.textViewFirst).text = viewModel.getLocalData()
+    }
+}
+
+class MVVMViewModelProviderFactoryImpl : ViewModelProvider.Factory{
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+            return MainViewModel(
+                    MVVMRepoImpl.getInstance(MVVMLocalDataImpl.getInstance())
+            ) as T
+        } else throw IllegalAccessException()
     }
 }
