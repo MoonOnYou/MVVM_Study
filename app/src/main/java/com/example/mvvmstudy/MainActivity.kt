@@ -3,21 +3,21 @@ package com.example.mvvmstudy
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.mvvmstudy.data.repo.MVVMRepoImpl
 import com.example.mvvmstudy.data.source.local.MVVMLocalDataImpl
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var viewModel: MainViewModel
+    private val mvvmViewModel by viewModels<MainViewModel> { MVVMViewModelProviderFactoryImpl() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = ViewModelProvider(this, MVVMViewModelProviderFactoryImpl()).get(MainViewModel::class.java)
 
-        findViewById<TextView>(R.id.textViewFirst).text = viewModel.getLocalData()
+        findViewById<TextView>(R.id.textViewFirst).text = mvvmViewModel.getLocalData()
     }
 }
 
