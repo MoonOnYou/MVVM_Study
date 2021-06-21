@@ -7,6 +7,8 @@ class MainViewModel(private val mvvmRepo: MVVMRepo) : ViewModel() , LifecycleObs
     private val _localStringLiveData = MutableLiveData<String>()
     val localStringLiveData : LiveData<String> = _localStringLiveData
 
+    val twoWayLiveData = MutableLiveData<String>()
+
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun getLocalData() {
         _localStringLiveData.value = mvvmRepo.getData()
