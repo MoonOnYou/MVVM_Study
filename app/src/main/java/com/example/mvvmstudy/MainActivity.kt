@@ -19,10 +19,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mvvmViewModel.getLocalData()
+        lifecycle.addObserver(mvvmViewModel)
+
         mvvmViewModel.localStringLiveData.observe (this) { data ->
             binding.textViewFirst.text = data
         }
+    }
+
+    override fun onDestroy() {
+        lifecycle.removeObserver(mvvmViewModel)
+        super.onDestroy()
+
     }
 }
 
