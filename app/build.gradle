@@ -58,4 +58,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
     // Lifecycles only
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+    // koin
+    implementation "org.koin:koin-androidx-scope:2.0.1"
+    implementation "org.koin:koin-androidx-ext:2.0.1"
 }
